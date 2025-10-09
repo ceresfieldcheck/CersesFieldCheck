@@ -1,0 +1,414 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+////////////////////////
+// Enums
+////////////////////////
+
+enum RoleName {
+  ADMIN
+  FARMER
+  ORGANIZATION
+  INVESTOR
+  SUPPLIER
+  MANUFACTURER
+}
+
+enum Status {
+  REGIONAL
+  GLOBAL
+  GOVT
+  NON_GOVT
+  PRIVATE
+}
+
+////////////////////////
+// Auth Models
+////////////////////////
+
+model User {
+  id           Int       @id @default(autoincrement())
+  email        String    @unique
+  passwordHash String
+  phone        String?
+  role         Role      @relation(fields: [roleId], references: [id])
+  roleId       Int
+  tokens       Token[]
+
+  // Profile relations (all optional 1:1)
+  farmerProfile        Farmer?
+  organizationProfile  OrganizationProfile?
+  investorProfile      Investor?
+  supplierProfile      Supplier?
+  manufacturerProfile  Manufacturer?
+
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Role {
+  id    Int      @id @default(autoincrement())
+  name  RoleName @unique
+  users User[]
+}
+
+model Token {
+  id           Int      @id @default(autoincrement())
+  userId       Int      @unique
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken  String   @unique
+  refreshToken String   @unique
+  expiresAt    DateTime
+  createdAt    DateTime @default(now())
+}
+
+
+
+////////////////////////
+// Profiles (1-to-1 with User)
+////////////////////////
+
+model OrganizationProfile {
+  id             Int      @id @default(autoincrement())
+  userId         Int      @unique
+  user           User     @relation(fields: [userId], references: [id])
+
+  name           String
+  type           String   // NGO, Cooperative, ResearchInstitution, GovtBody, Bank, etc.
+  responsible    String?
+  phone          String?
+  email          String?
+  website        String?
+  sector         String?
+  status         Status?
+  numFarmers     Int?
+  locations      Json?
+  fundingSource  String?
+  govtCooperation Boolean?
+  govtDetails    String?
+  transport      String?
+  additionalInfo String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Farmer {
+  id              Int      @id @default(autoincrement())
+  userId          Int      @unique
+  user            User     @relation(fields: [userId], references: [id])
+
+  name            String
+  age             Int?
+  phone           String?
+  email           String?
+  location        String?
+  fieldSize       String?
+  cropTypes       Json?
+  farmingMethod   String?
+  waterSource     String?
+  marketAccess    String?
+  biggestChallenge String?
+  transport       String?
+  digitalAccess   Boolean?
+  additionalInfo  String?
+
+  cooperativeId   Int?
+  cooperative     Cooperative? @relation(fields: [cooperativeId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Investor {
+  id             Int      @id @default(autoincrement())
+  userId         Int      @unique
+  user           User     @relation(fields: [userId], references: [id])
+
+  name           String
+  responsible    String?
+  phone          String?
+  email          String?
+  website        String?
+  type           String?
+  sectors        Json?
+  ticketSize     String?
+  location       String?
+  message        String?
+  additionalInfo String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Supplier {
+  id             Int      @id @default(autoincrement())
+  userId         Int      @unique
+  user           User     @relation(fields: [userId], references: [id])
+
+  name           String
+  responsible    String?
+  phone          String?
+  email          String?
+  website        String?
+  industry       String?
+  deliveryTime   String?
+  restockingTime String?
+  certifications String?
+  status         Status?
+  transport      String?
+  longTermPartner Boolean?
+  additionalInfo String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Manufacturer {
+  id             Int      @id @default(autoincrement())
+  userId         Int      @unique
+  user           User     @relation(fields: [userId], references: [id])
+
+  name           String
+  responsible    String?
+  phone          String?
+  email          String?
+  website        String?
+  capability     String?
+  productionCap  String?
+  availability   String?
+  maintenance    String?
+  materialSource String?
+  personnel      String?
+  manufactureTime String?
+  quotationTimes String?
+  workingHours   String?
+  deliveryTime   String?
+  status         Status?
+  transport      String?
+  longTermPartner Boolean?
+  additionalInfo String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+////////////////////////
+// Other Domain Models
+////////////////////////
+
+model Cooperative {
+  id             Int      @id @default(autoincrement())
+  name           String
+  responsible    String?
+  phone          String?
+  email          String?
+  website        String?
+  cropTypes      Json?
+  status         Status?
+  numFarmers     Int?
+  location       String?
+  fundingSource  String?
+  govtCooperation Boolean?
+  transport      String?
+  additionalInfo String?
+
+  farmers Farmer[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Warehouse {
+  id             Int      @id @default(autoincrement())
+  name           String
+  responsible    String?
+  phone          String?
+  email          String?
+  website        String?
+  status         Status?
+  totalArea      Float?
+  availableArea  Float?
+  tempControl    String?
+  cost           String?
+  transport      String?
+  additionalInfo String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Supermarket {
+  id             Int      @id @default(autoincrement())
+  name           String
+  responsible    String?
+  phone          String?
+  email          String?
+  website        String?
+  numShops       Int?
+  regions        Json?
+  status         Status?
+  numFarmers     Int?
+  procurementModel String?
+  location       String?
+  additionalInfo String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Distributor {
+  id             Int      @id @default(autoincrement())
+  name           String
+  responsible    String?
+  phone          String?
+  email          String?
+  website        String?
+  industry       String?
+  deliveryTime   String?
+  reach          String?
+  status         Status?
+  transport      String?
+  longTermPartner Boolean?
+  additionalInfo String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Logistics {
+  id             Int      @id @default(autoincrement())
+  name           String
+  responsible    String?
+  phone          String?
+  email          String?
+  website        String?
+  vehicles       Json?
+  deliveryTime   String?
+  routeCoverage  String?
+  status         Status?
+  longTermPartner Boolean?
+  additionalInfo String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model GovernmentBody {
+  id             Int      @id @default(autoincrement())
+  name           String
+  responsible    String?
+  phone          String?
+  email          String?
+  website        String?
+  deptType       String?
+  schemes        Json?
+  locations      Json?
+  programs       String?
+  additionalInfo String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Bank {
+  id             Int      @id @default(autoincrement())
+  name           String
+  responsible    String?
+  phone          String?
+  email          String?
+  website        String?
+  type           String?
+  products       String?
+  locations      Json?
+  interestRates  String?
+  partnerships   String?
+  additionalInfo String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ExportHouse {
+  id             Int      @id @default(autoincrement())
+  name           String
+  responsible    String?
+  phone          String?
+  email          String?
+  website        String?
+  products       String?
+  targetCountries Json?
+  certifications String?
+  status         Status?
+  delivery       String?
+  additionalInfo String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model TechProvider {
+  id             Int      @id @default(autoincrement())
+  name           String
+  responsible    String?
+  phone          String?
+  email          String?
+  website        String?
+  focus          String?
+  services       String?
+  deliveryModel  String?
+  status         Status?
+  support        String?
+  additionalInfo String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model TrainingCenter {
+  id             Int      @id @default(autoincrement())
+  name           String
+  responsible    String?
+  phone          String?
+  email          String?
+  website        String?
+  focus          String?
+  numFarmers     Int?
+  locations      Json?
+  certification  Boolean?
+  govtCooperation Boolean?
+  additionalInfo String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model InsuranceProvider {
+  id             Int      @id @default(autoincrement())
+  name           String
+  responsible    String?
+  phone          String?
+  email          String?
+  website        String?
+  products       String?
+  premiumModels  String?
+  claimTime      String?
+  status         Status?
+  govtSchemes    String?
+  additionalInfo String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model RuralEntrepreneur {
+  id             Int      @id @default(autoincrement())
+  name           String
+  responsible    String?
+  phone          String?
+  email          String?
+  location       String?
+  serviceType    String?
+  cost           String?
+  availability   String?
+  partnerWilling Boolean?
+  additionalInfo String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
