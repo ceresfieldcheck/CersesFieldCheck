@@ -185,6 +185,31 @@ export function ContactContent() {
       {/* MAP SECTION */}
 # Dependencies
 node_modules/
+      <Box py={80} style={{ backgroundColor: lightBackground }}>
+        <Container size="lg">
+          <Stack align="center" mb="xl" ta="center">
+            <Title order={2} c="green.8">Where We Operate</Title>
+            <Text size="lg" c="dimmed">Serving farmers in India with expansion plans across Asia</Text>
+          </Stack>
+          <Card shadow="sm" padding={0} radius="md" withBorder>
+            <Box
+              h={400}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                background: `url('https://snazzy-maps-cdn.azureedge.net/assets/1262-ubergine.png?v=20170626040936') center/cover`,
+                color: 'white',
+                fontSize: '1.2rem',
+                fontWeight: 600,
+                textAlign: 'center'
+              }}
+            >
+              Current Focus: Andhra Pradesh, India
+            </Box>
+          </Card>
+        </Container>
+      </Box>
 
 # Build artifacts
 dist/
