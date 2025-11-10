@@ -1,22 +1,32 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { PrismaService } from 'prisma/prisma.service';
+import {
+  Injectable,
+  UnauthorizedException,
+  ConflictException,
+} from '@nestjs/common';
+import { PrismaService } from '../prisma/prisma.service';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
-import { addDays } from 'date-fns';
+import { RegisterDto } from './dto/register.dto';
+import { LoginDto } from './dto/login.dto';
 
 @Injectable()
 export class AuthService {
   constructor(
     private prisma: PrismaService,
     private jwtService: JwtService,
-  ) {}
+  ) { }
 
-async register(email: string, password: string, phone: string, roleId: number) {
-  try {
-    // Check if email already exists
+  /**
+   * Handles user registration.
+   * - Hashes password.
+   * - Creates a new user in the database.
+   */
+  async register(registerDto: RegisterDto) {
+    const { email, password, role } = registerDto;
+
     const existingUser = await this.prisma.user.findUnique({ where: { email } });
     if (existingUser) {
-      throw new Error('Email already registered');
+      throw new ConflictException('An account with this email already exists.');
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -24,104 +34,65 @@ async register(email: string, password: string, phone: string, roleId: number) {
     const user = await this.prisma.user.create({
       data: {
         email,
-        passwordHash: hashedPassword,
-        roleId,
+        password: hashedPassword,
+        role,
       },
     });
 
-    const accessToken = this.jwtService.sign({ userId: user.id, roleId });
-    const refreshToken = this.jwtService.sign(
-      { userId: user.id },
-      { expiresIn: '7d' },
-    );
-
-    await this.prisma.token.upsert({
-      where: { userId: user.id },
-      update: { accessToken, refreshToken, expiresAt: addDays(new Date(), 7) },
-      create: {
-        userId: user.id,
-        accessToken,
-        refreshToken,
-        expiresAt: addDays(new Date(), 7),
-      },
-    });
-
-    return { user, accessToken, refreshToken };
-  } catch (error) {
-    console.error('❌ Registration error:', error);
-    throw new Error('Registration failed: ' + error.message);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { password: _, ...result } = user;
+    return result;
   }
-}
 
+  /**
+   * Logs a user in by verifying their password and issuing JWTs.
+   */
+  async login(loginDto: LoginDto) {
+    const { email, password } = loginDto;
+    const user = await this.prisma.user.findUnique({ where: { email } });
+    if (!user) {
+      throw new UnauthorizedException('Invalid email or password.');
+    }
 
-  async login(email: string, password: string) {
-    const user = await this.prisma.user.findUnique({
-      where: { email },
-      include: { role: true },
-    });
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+      throw new UnauthorizedException('Invalid email or password.');
+    }
 
-    if (!user) throw new UnauthorizedException('Invalid credentials');
-    const valid = await bcrypt.compare(password, user.passwordHash);
-    if (!valid) throw new UnauthorizedException('Invalid credentials');
+    const payload = { sub: user.id, role: user.role };
+    const [accessToken, refreshToken] = await Promise.all([
+      this.jwtService.signAsync(payload, { expiresIn: '15m' }),
+      this.jwtService.signAsync(payload, { expiresIn: '7d' }),
+    ]);
 
-    // Create access + refresh tokens
-    const payload = { sub: user.id, role: user.role.name };
-    const accessToken = await this.jwtService.signAsync(payload, {
-      expiresIn: '15m',
-    });
-    const refreshToken = await this.jwtService.signAsync(payload, {
-      expiresIn: '7d',
-    });
-
-    // Save refresh token in DB
-    await this.prisma.token.upsert({
-      where: { userId: user.id },
-      update: { accessToken, refreshToken, expiresAt: addDays(new Date(), 7) },
-      create: {
-        userId: user.id,
-        accessToken,
-        refreshToken,
-        expiresAt: addDays(new Date(), 7),
-      },
-    });
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { password: _, ...userResult } = user;
 
     return {
       accessToken,
       refreshToken,
-      user: {
-        id: user.id,
-        email: user.email,
-        role: user.role.name,
-      },
+      user: userResult,
     };
   }
 
+  /**
+   * Issues a new access token if the refresh token is valid.
+   */
   async refreshToken(refreshToken: string) {
     try {
       const decoded = await this.jwtService.verifyAsync(refreshToken, {
-        secret: process.env.JWT_SECRET,
+        secret: process.env.JWT_SECRET || 'supersecret',
       });
 
-      const existingToken = await this.prisma.token.findUnique({
-        where: { refreshToken },
-        include: { user: { include: { role: true } } },
-      });
+      const user = await this.prisma.user.findUnique({ where: { id: decoded.sub } });
+      if (!user) {
+        throw new UnauthorizedException('User not found.');
+      }
 
-      if (!existingToken) throw new UnauthorizedException('Invalid token');
-
-      const newPayload = {
-        sub: existingToken.user.id,
-        role: existingToken.user.role.name,
-      };
+      const newPayload = { sub: user.id, role: user.role };
 
       const newAccessToken = await this.jwtService.signAsync(newPayload, {
         expiresIn: '15m',
-      });
-
-      // Update token record
-      await this.prisma.token.update({
-        where: { id: existingToken.id },
-        data: { accessToken: newAccessToken },
       });
 
       return { accessToken: newAccessToken };
