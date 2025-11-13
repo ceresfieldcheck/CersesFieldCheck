@@ -13,17 +13,7 @@ import {
   Image,
   Button,
 } from "@mantine/core";
-import {
-  IconTools,
-  IconLeaf,
-  IconRefresh,
-  IconBuildingFactory,
-  IconCurrencyEuro,
-  IconDroplet,
-  IconUsers,
-  IconChartPie,
-  IconShieldCheck,
-} from "@tabler/icons-react";
+import { IconTools, IconRefresh, IconShieldCheck } from "@tabler/icons-react";
 import Link from "next/link";
 
 export function StatsSection() {

@@ -8,7 +8,6 @@ import {
   Button,
   Group,
   Stack,
-  Image,
   Box,
 } from "@mantine/core";
 import Link from "next/link";

@@ -5,7 +5,6 @@ import {
   Container,
   Title,
   Text,
-  Grid,
   Card,
   Stack,
   Avatar,

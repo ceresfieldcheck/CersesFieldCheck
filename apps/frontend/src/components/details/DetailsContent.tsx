@@ -14,18 +14,15 @@ import {
   Button,
 } from "@mantine/core";
 import {
-  IconBulb,
   IconTarget,
   IconRocket,
   IconAward,
   IconUsers,
   IconLeaf,
-  IconLock,
   IconPuzzle,
   IconCheck,
   IconMapPin,
   IconCalendarEvent,
-  IconEye,
 } from "@tabler/icons-react";
 import Link from "next/link";
 

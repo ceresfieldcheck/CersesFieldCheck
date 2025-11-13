@@ -23,7 +23,6 @@ import {
   IconHeartHandshake,
   IconSpeakerphone,
   IconMapPin,
-  IconPhone,
 } from "@tabler/icons-react";
 
 export function ContactContent() {

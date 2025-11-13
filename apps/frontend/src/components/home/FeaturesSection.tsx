@@ -9,7 +9,6 @@ import {
   Stack,
   ThemeIcon,
   Box,
-  Group,
 } from "@mantine/core";
 import {
   IconEye,

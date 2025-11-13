@@ -13,16 +13,7 @@ import {
   Button,
   Image,
 } from "@mantine/core";
-import {
-  IconMail,
-  IconPhone,
-  IconMapPin,
-  IconTractor,
-  IconBrandTwitter,
-  IconBrandFacebook,
-  IconBrandLinkedin,
-  IconArrowRight,
-} from "@tabler/icons-react";
+import { IconMail, IconMapPin, IconBrandTwitter, IconBrandFacebook, IconBrandLinkedin, IconArrowRight } from "@tabler/icons-react";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -54,14 +45,6 @@ export function Footer() {
     { label: "Contact", href: "/contact" },
     { label: "Login", href: "/login" },
     { label: "Register", href: "/register" },
-  ];
-
-  const services = [
-    "Farm Monitoring",
-    "Crop Analysis",
-    "Robot Management",
-    "Data Analytics",
-    "Weather Tracking",
   ];
 
   return (
