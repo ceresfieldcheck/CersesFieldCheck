@@ -77,7 +77,7 @@ export function ContactContent() {
             c="white"
             style={{ opacity: 0.9, maxWidth: "800px", margin: "0 auto" }}
           >
-            We'd love to hear from you. Reach out for partnerships, demos, or any questions about our solutions.
+            We&apos;d love to hear from you. Reach out for partnerships, demos, or any questions about our solutions.
           </Text>
         </Container>
       </Box>

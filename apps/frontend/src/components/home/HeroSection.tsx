@@ -59,7 +59,7 @@ export function HeroSection() {
                       letterSpacing: "0.1em",
                     }}
                   >
-                    Keeping World's Fields Healthy
+                    Keeping World&apos;s Fields Healthy
                   </Text>
                 </div>
               </Group>

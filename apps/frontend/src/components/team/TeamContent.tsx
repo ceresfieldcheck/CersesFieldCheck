@@ -9,8 +9,7 @@ import {
   Stack,
   Avatar,
   SimpleGrid,
-} from "@mantine/core";
-import Image from "next/image";
+} from "@mantine/core"; 
 
 const foundingTeam = [
   {

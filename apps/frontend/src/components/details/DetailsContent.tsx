@@ -26,8 +26,6 @@ import {
 } from "@tabler/icons-react";
 import Link from "next/link";
 
-// Define the colors for green gradient sections for consistency
-const primaryGradient = { from: "green.7", to: "green.9", deg: 135 };
 const lightBackground = "#f8f9fa"; // Similar to section--cream background
 
 export function DetailsContent() {

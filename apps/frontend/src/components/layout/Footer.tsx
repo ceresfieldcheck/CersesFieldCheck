@@ -11,7 +11,6 @@ import {
   ActionIcon,
   TextInput,
   Button,
-  Image,
 } from "@mantine/core";
 import { IconMail, IconMapPin, IconBrandTwitter, IconBrandFacebook, IconBrandLinkedin, IconArrowRight } from "@tabler/icons-react";
 

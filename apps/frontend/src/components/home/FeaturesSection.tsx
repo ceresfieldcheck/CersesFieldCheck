@@ -83,8 +83,8 @@ export function FeaturesSection() {
         <Container size="lg" style={{ position: "relative", zIndex: 1 }}>
           <Stack gap="md" align="center" mb="xl" ta="center">
             <Title order={2} size="2.5rem" fw={700} c="green.8">
-              60% of global crops are lost to weeds and diseases. We're changing
-              that.
+              60% of global crops are lost to weeds and diseases. We&apos;re
+              changing that.
             </Title>
             <Text size="lg" c="dimmed">
               Three key innovations that make the difference
