@@ -1,9 +1,9 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "main": "dist/main.js",
+  "main": "../../dist/apps/backend/main.js",
   "scripts": {
-    "start": "node dist/main.js",
+    "start": "node ../../dist/apps/backend/main.js",
     "start:dev": "nest start --watch",
     "build": "nest build"
   },

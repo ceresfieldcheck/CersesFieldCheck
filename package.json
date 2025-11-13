@@ -6,15 +6,20 @@
     "shared/*"
   ],
   "scripts": {
+    "prisma:generate": "npx prisma generate --schema=shared/database/prisma/schema.prisma",
+    "prisma:migrate": "npx prisma migrate deploy --schema=shared/database/prisma/schema.prisma",
     "build:shared": "npm --workspace shared/database run build",
+    "build:backend": "npm run prisma:generate && npm run build:shared && npm --workspace apps/backend run build",
     "build:frontend": "npm --workspace apps/frontend run build",
-    "build:backend": "npm run build:shared && npm --workspace apps/backend run build",
-    "build": "concurrently \"npm:build:*\"",
+    "build": "npm run build:frontend && npm run build:backend",
     "dev:frontend": "npm --workspace apps/frontend run dev",
     "dev:backend": "npm --workspace apps/backend run start:dev",
     "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\""
   },
   "devDependencies": {
     "concurrently": "^8.0.0"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.17.0"
   }
 }
