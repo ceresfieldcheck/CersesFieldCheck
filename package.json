@@ -6,8 +6,9 @@
     "shared/*"
   ],
   "scripts": {
+    "build:shared": "npm --workspace shared/database run build",
     "build:frontend": "npm --workspace apps/frontend run build",
-    "build:backend": "npm --workspace apps/backend run build",
+    "build:backend": "npm run build:shared && npm --workspace apps/backend run build",
     "build": "concurrently \"npm:build:*\"",
     "dev:frontend": "npm --workspace apps/frontend run dev",
     "dev:backend": "npm --workspace apps/backend run start:dev",
