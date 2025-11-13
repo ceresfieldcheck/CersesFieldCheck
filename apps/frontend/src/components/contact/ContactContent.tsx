@@ -182,65 +182,6 @@ export function ContactContent() {
         </Container>
       </Box>
 
-      {/* MAP SECTION */}
-# Dependencies
-node_modules/
-
-# Build artifacts
-dist/
-.next/
-
-# Log files
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# Environment variables
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-# IDE and editor files
-.vscode/
-.idea/
-
-# Turbopack
-.turbo/
-
-# Mac OS
-.DS_Store
-# Dependencies
-node_modules/
-
-# Build artifacts
-dist/
-.next/
-
-# Log files
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# Environment variables
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-# IDE and editor files
-.vscode/
-.idea/
-
-# Turbopack
-.turbo/
-
-# Mac OS
-.DS_Store
- */}
-
       {/* FAQ SECTION */}
       <Box py={80} style={{ backgroundColor: "#ffffff" }}>
         <Container size="md">
