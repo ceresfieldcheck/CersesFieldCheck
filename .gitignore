@@ -1,86 +1,33 @@
-######################################
-# 🧩 Dependencies
-######################################
+# 2. Create/overwrite a good .gitignore (monorepo)
+Set-Content -Path .gitignore -Value @'
+# dependencies
 node_modules/
 apps/frontend/node_modules/
 apps/backend/node_modules/
 
-######################################
-# ⚙️ Build Outputs
-######################################
+# builds
 dist/
 .next/
 out/
 build/
 coverage/
 
-######################################
-# 🗄️ Environment Variables
-######################################
+# env
 .env
 .env.local
-.env.development
-.env.development.local
-.env.test
-.env.test.local
-.env.production
-.env.production.local
-apps/frontend/.env
-apps/frontend/.env.local
-apps/backend/.env
-apps/backend/.env.local
+.env.*.local
 
-######################################
-# 🧾 Logs and Debug
-######################################
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-logs/
-*.log
-
-######################################
-# 🧰 IDE / Editor Configs
-######################################
-.vscode/
-.idea/
-*.swp
-*.swo
-
-######################################
-# 🧪 Testing Artifacts
-######################################
-jest/
-test-results/
-coverage/
-.playwright/
-.cypress/
-reports/
-
-######################################
-# 💾 Prisma / Database
-######################################
+# prisma / db
 *.db
 *.sqlite
-*.sqlite-journal
-prisma/migrations/dev/
-shared/prisma/migrations/dev/
 .prisma/
 
-######################################
-# 🧱 OS and Misc Files
-######################################
+# OS / IDE
 .DS_Store
-Thumbs.db
-ehthumbs.db
-Desktop.ini
+.vscode/
+.idea/
 
-######################################
-# ⚡ Turborepo / Build Cache
-######################################
+# turborepo / caches
 .turbo/
-.vercel/
 .cache/
-.tmp/
-temp/
+'@
