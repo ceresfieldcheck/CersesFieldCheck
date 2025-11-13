@@ -7,7 +7,6 @@ import {
   Group,
   Stack,
   ThemeIcon,
-  Progress,
   Badge,
   Button,
   SimpleGrid,
@@ -19,19 +18,15 @@ import {
   IconTrendingUp,
   IconTruck,
   IconCheck,
-  IconAlertTriangle,
 } from "@tabler/icons-react";
 
-interface SupplierDashboardProps {
+interface DashboardProps {
   user: {
-    id: number;
     email: string;
-    role: string;
-    userId: number;
   };
 }
 
-export function SupplierDashboard({ user }: SupplierDashboardProps) {
+export function SupplierDashboard({ user }: DashboardProps) { 
   // Mock data - replace with real API calls
   const supplierStats = {
     totalProducts: 45,
@@ -67,7 +62,7 @@ export function SupplierDashboard({ user }: SupplierDashboardProps) {
                 Supplier Dashboard 📦
               </Title>
               <Text c="dimmed" size="lg">
-                Manage your inventory, orders, and customer relationships
+                Welcome, {user.email}. Manage your inventory, orders, and customer relationships.
               </Text>
             </Stack>
             <Button color="violet" size="sm">

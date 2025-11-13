@@ -87,16 +87,15 @@ export function StatsSection() {
             </Text>
           </Stack>
 
-          <Box mb="3rem">
+          <Card mb="3rem" shadow="xl" radius="lg" padding={0}>
             <Image
               src="https://images.unsplash.com/photo-1535379453347-1ffd615e2e08?w=1200&auto=format&fit=crop&q=80"
               alt="Agricultural technology in action"
               radius="lg"
               maw={900}
               mx="auto"
-              shadow="xl"
             />
-          </Box>
+          </Card>
 
           <Grid gutter="xl">
             {lukeFeatures.map((feature, index) => (
@@ -232,18 +231,20 @@ export function StatsSection() {
 
             <Grid.Col span={{ base: 12, md: 6 }}>
               <Stack gap="md">
-                <Image
-                  src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800&auto=format&fit=crop&q=80"
-                  alt="Agricultural robot technology"
-                  radius="lg"
-                  shadow="md"
-                />
-                <Image
-                  src="https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=800&auto=format&fit=crop&q=80"
-                  alt="Healthy green crops"
-                  radius="lg"
-                  shadow="md"
-                />
+                <Card shadow="md" radius="lg" padding={0}>
+                  <Image
+                    src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800&auto=format&fit=crop&q=80"
+                    alt="Agricultural robot technology"
+                    radius="lg"
+                  />
+                </Card>
+                <Card shadow="md" radius="lg" padding={0}>
+                  <Image
+                    src="https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=800&auto=format&fit=crop&q=80"
+                    alt="Healthy green crops"
+                    radius="lg"
+                  />
+                </Card>
               </Stack>
             </Grid.Col>
           </Grid>
@@ -253,13 +254,12 @@ export function StatsSection() {
               Supporting UN Sustainable Development Goals
             </Title>
 
-            <Box
-              p="md"
+            <Card
               radius="lg"
-              style={{
-                backgroundColor: "#e8f5e9",
-                maxWidth: "800px",
-              }}
+              padding="md"
+              bg="green.0"
+              w="100%"
+              maw={800}
             >
               <Text fw={700} c="green.9" mb="sm">
                 Primary SDGs
@@ -285,16 +285,14 @@ export function StatsSection() {
               >
                 SDG 13: Climate Action - Reducing chemical use and environmental impact
               </Box>
-            </Box>
+            </Card>
 
-            <Box
-              p="md"
+            <Card
               radius="lg"
-              style={{
-                backgroundColor: "#ffffff",
-                boxShadow: "0 2px 10px rgba(0,0,0,0.05)",
-                maxWidth: "800px",
-              }}
+              padding="md"
+              shadow="sm"
+              w="100%"
+              maw={800}
             >
               <Text fw={700} c="green.9" mb="sm">
                 Secondary SDGs
@@ -308,7 +306,7 @@ export function StatsSection() {
               <Text c="dimmed" fw={600}>
                 SDG 12: Responsible Production - Sustainable farming
               </Text>
-            </Box>
+            </Card>
           </Stack>
         </Container>
       </Box>

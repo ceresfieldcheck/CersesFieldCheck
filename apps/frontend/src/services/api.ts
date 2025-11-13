@@ -57,7 +57,7 @@ export async function apiFetch(path: string, options: RequestInit = {}) {
     try {
       const errorData = await response.json();
       errorMessage = errorData.message || errorMessage;
-    } catch (e) {
+    } catch {
       // If response is not JSON, use the status text
       errorMessage = response.statusText || errorMessage;
     }

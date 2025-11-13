@@ -131,7 +131,7 @@ export function DetailsContent() {
             <Card p="xl" radius="lg" bg="green.7" c="white" h="100%">
               <Title order={2} c="white" mb="md">Our Mission</Title>
               <Text size="xl" fw={600} c="white" lh={1.4} mb="md">
-                Keeping World's Fields Healthy
+                Keeping Worlds Fields Healthy
               </Text>
               <Text c="white" style={{ opacity: 0.9 }}>
                 We empower farmers worldwide with affordable, intelligent agricultural technology

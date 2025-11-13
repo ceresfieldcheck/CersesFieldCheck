@@ -7,7 +7,6 @@ import {
   Group,
   Stack,
   ThemeIcon,
-  Progress,
   Badge,
   Button,
   SimpleGrid,
@@ -16,23 +15,18 @@ import {
 import {
   IconTrendingUp,
   IconTractor,
-  IconChartBar,
   IconBuilding,
   IconCurrencyDollar,
   IconTarget,
-  IconCheck,
 } from "@tabler/icons-react";
 
-interface InvestorDashboardProps {
+interface DashboardProps {
   user: {
-    id: number;
     email: string;
-    role: string;
-    userId: number;
   };
 }
 
-export function InvestorDashboard({ user }: InvestorDashboardProps) {
+export function InvestorDashboard({ user }: DashboardProps) { 
   // Mock data - replace with real API calls
   const portfolioStats = {
     totalInvestment: 2500000,
@@ -68,7 +62,7 @@ export function InvestorDashboard({ user }: InvestorDashboardProps) {
                 Investor Dashboard 📈
               </Title>
               <Text c="dimmed" size="lg">
-                Track your agricultural investments and portfolio performance
+                Welcome, {user.email}. Track your investments and portfolio performance.
               </Text>
             </Stack>
             <Button color="orange" size="sm">

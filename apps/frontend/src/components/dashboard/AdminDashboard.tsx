@@ -23,16 +23,13 @@ import {
   IconRobot,
 } from "@tabler/icons-react";
 
-interface AdminDashboardProps {
+interface DashboardProps {
   user: {
-    id: number;
     email: string;
-    role: string;
-    userId: number;
   };
 }
 
-export function AdminDashboard({ user }: AdminDashboardProps) {
+export function AdminDashboard({ user }: DashboardProps) {
   // Mock data - replace with real API calls
   const systemStats = {
     totalUsers: 1250,
@@ -75,7 +72,7 @@ export function AdminDashboard({ user }: AdminDashboardProps) {
                 Admin Dashboard 🛡️
               </Title>
               <Text c="dimmed" size="lg">
-                System overview and management console
+                Welcome, {user.email}. System overview and management console.
               </Text>
             </Stack>
             <Button color="red" size="sm">

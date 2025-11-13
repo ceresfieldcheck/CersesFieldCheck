@@ -16,23 +16,18 @@ import {
 import {
   IconTools,
   IconRobot,
-  IconPackage,
-  IconTrendingUp,
   IconSettings,
   IconCheck,
-  IconAlertTriangle,
+  IconTrendingUp,
 } from "@tabler/icons-react";
 
-interface ManufacturerDashboardProps {
+interface DashboardProps {
   user: {
-    id: number;
     email: string;
-    role: string;
-    userId: number;
   };
 }
 
-export function ManufacturerDashboard({ user }: ManufacturerDashboardProps) {
+export function ManufacturerDashboard({ user }: DashboardProps) { 
   // Mock data - replace with real API calls
   const manufacturerStats = {
     totalProducts: 25,
@@ -68,7 +63,7 @@ export function ManufacturerDashboard({ user }: ManufacturerDashboardProps) {
                 Manufacturer Dashboard 🔧
               </Title>
               <Text c="dimmed" size="lg">
-                Manage your production, equipment, and manufacturing operations
+                Welcome, {user.email}. Manage your production and manufacturing operations.
               </Text>
             </Stack>
             <Button color="teal" size="sm">

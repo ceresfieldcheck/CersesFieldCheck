@@ -89,7 +89,7 @@ export default function RegisterPage() {
         try {
           const errorResponse = JSON.parse(err.message);
           errorMessage = errorResponse.message || err.message;
-        } catch (e) {
+        } catch {
           errorMessage = err.message;
         }
       }

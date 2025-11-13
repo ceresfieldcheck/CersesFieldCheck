@@ -382,7 +382,7 @@ export function ImpactContent() {
               Impact Tracking & Goals
             </Title>
             <Text size="lg" c="dimmed">
-              Measurable outcomes we're committed to achieving
+              Measurable outcomes we&apos;re committed to achieving
             </Text>
           </Stack>
           <Box maw={900} mx="auto" style={{ overflowX: 'auto' }}>

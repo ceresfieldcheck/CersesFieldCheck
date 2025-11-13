@@ -13,26 +13,15 @@ import {
   SimpleGrid,
   Table,
 } from "@mantine/core";
-import {
-  IconUsers,
-  IconTractor,
-  IconChartBar,
-  IconBuilding,
-  IconTrendingUp,
-  IconLeaf,
-  IconCheck,
-} from "@tabler/icons-react";
+import { IconUsers, IconTractor, IconBuilding, IconLeaf } from "@tabler/icons-react"; 
 
-interface OrganizationDashboardProps {
+interface DashboardProps {
   user: {
-    id: number;
     email: string;
-    role: string;
-    userId: number;
   };
 }
 
-export function OrganizationDashboard({ user }: OrganizationDashboardProps) {
+export function OrganizationDashboard({ user }: DashboardProps) { 
   // Mock data - replace with real API calls
   const orgStats = {
     totalMembers: 125,
@@ -68,7 +57,7 @@ export function OrganizationDashboard({ user }: OrganizationDashboardProps) {
                 Organization Dashboard 🏢
               </Title>
               <Text c="dimmed" size="lg">
-                Manage your farmer members and agricultural programs
+                Welcome, {user.email}. Manage your farmer members and agricultural programs.
               </Text>
             </Stack>
             <Button color="blue" size="sm">
