@@ -164,12 +164,11 @@ export function DetailsContent() {
               <Stack gap="lg">
                 <Title order={2} c="green.8">Our Story</Title>
                 <Text>
-                  Ceres FieldCheck was born from a simple observation: **farmers, who feed the world,
-                  lose more than half their potential harvest to preventable causes.**
+                  Ceres FieldCheck was born from a simple observation: **farmers, who feed the world, lose more than half their potential harvest to preventable causes.**
                 </Text>
                 <Text>
                   Founded in November 2023 by a team with deep agricultural roots and cutting-edge robotics
-                  expertise, we're building affordable, intelligent solutions that work for small farmers.
+                  expertise, we&apos;re building affordable, intelligent solutions that work for small farmers.
                 </Text>
                 <Text>
                   Our journey has taken us from university incubators to international recognition, securing
@@ -177,7 +176,7 @@ export function DetailsContent() {
                   GIZ India, ICAR, and the Government of Andhra Pradesh.
                 </Text>
                 <Text>
-                  We've achieved finalist positions in major innovation competitions, been featured in
+                  We&apos;ve achieved finalist positions in major innovation competitions, been featured in
                   international media, and most importantly—validated our technology with real farmers
                   in the field.
                 </Text>
@@ -319,8 +318,8 @@ export function DetailsContent() {
           <Stack gap="md" align="center">
             <Title order={2} c="white">Join Us in Transforming Agriculture</Title>
             <Text size="lg" c="white" style={{ opacity: 0.9, maxWidth: "700px" }} mb="lg">
-              Whether you're a farmer, investor, partner organization, or supporter of sustainable agriculture,
-              we'd love to connect with you.
+              Whether you&apos;re a farmer, investor, partner organization, or supporter of sustainable agriculture,
+              we&apos;d love to connect with you.
             </Text>
             <Group gap="md" justify="center">
               <Button

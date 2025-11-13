@@ -418,7 +418,7 @@ export function ImpactContent() {
                 <tr style={{ background: lightBackground }}>
                   <td style={{ padding: "1rem" }}><Text fw={700} c="green.8">Income</Text></td>
                   <td style={{ padding: "1rem" }}><Text c="dimmed">Farmer income increase</Text></td>
-                  <td style={{ padding: "1rem" }}><Text c="dimmed">35.14% improvement</Text></td>
+                  <td style={{ padding: "1rem" }}><Text c="dimmed">35.14% improvement</Text></td> 
                 </tr>
               </tbody>
             </table>
