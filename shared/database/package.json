@@ -4,13 +4,15 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc -p tsconfig.json"
+    "generate": "npx prisma generate --schema=prisma/schema.prisma",
+    "build": "tsc -p tsconfig.json",
+    "migrate": "npx prisma migrate dev --schema=prisma/schema.prisma --name init_user_model"
   },
   "dependencies": {
-    "@prisma/client": "^6.17.0"
+    "@prisma/client": "^6.19.0"
   },
   "devDependencies": {
-    "prisma": "^6.17.0",
+    "prisma": "^6.19.0",
     "typescript": "^5.5.0"
   }
 }

@@ -1,33 +1,36 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "main": "../../dist/apps/backend/main.js",
+  "main": "dist/main.js",
   "scripts": {
-    "start": "node ../../dist/apps/backend/main.js",
+    "start": "node dist/main.js",
     "start:dev": "nest start --watch",
     "build": "nest build"
   },
   "dependencies": {
+    "@cfc/database": "file:../../shared/database",
+    "@isaacs/brace-expansion": "^5.0.0",
     "@nestjs/common": "^10.0.0",
     "@nestjs/core": "^10.0.0",
     "@nestjs/jwt": "^10.2.0",
     "@nestjs/passport": "^10.0.0",
     "@nestjs/platform-express": "^10.0.0",
     "@nestjs/swagger": "^7.4.2",
-    "@cfc/database": "file:../../shared/database",
     "bcrypt": "^5.1.1",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
     "express": "^4.19.2",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",
+    "path-scurry": "^2.0.1",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1",
-    "swagger-ui-express": "^5.0.1",
-    "typescript": "^5.5.0"
+    "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
     "@nestjs/cli": "^11.0.0",
-    "ts-node-dev": "^2.0.0"
+    "commander": "^12.1.0",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.5.0"
   }
 }

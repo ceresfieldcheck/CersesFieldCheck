@@ -20,7 +20,7 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "@cfc/database": ["../../shared/database/src"]
+      "@cfc/database": ["../../shared/database/dist"]
     }
   },
   "include": ["src/**/*"],
